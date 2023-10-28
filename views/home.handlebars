@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Tech Blog</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Tech Blog</h1>
+        <nav>
+            <ul>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/login">Log In</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Latest Blog Posts</h2>
+            {{#if posts}}
+                <ul>
+                    {{#each posts}}
+                        <li>
+                            <h3>{{title}}</h3>
+                            <p>{{content}}</p>
+                            <p>Posted by: {{username}}</p>
+                        </li>
+                    {{/each}}
+                </ul>
+            {{else}}
+                <p>No blog posts available.</p>
+            {{/if}}
+        </section>
+    </main>
+</body>
+</html>
