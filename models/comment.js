@@ -1,24 +1,30 @@
 module.exports = (sequelize, DataTypes) => {
-    const Comment = sequelize.define('Comment', {
-      text: {
-        type: DataTypes.TEXT,
+  const Comment = sequelize.define('Comment', {
+    text: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+  });
+
+  // Add a validation for the text column
+  Comment.validate({
+    text: {
+      notNull: {
+        msg: 'Text is required',
+      },
+    },
+  });
+
+  Comment.associate = (models) => {
+    Comment.belongsTo(models.User, {
+      foreignKey: {
         allowNull: false,
       },
     });
-  
-    Comment.associate = (models) => {
-      Comment.belongsTo(models.User, {
-        foreignKey: {
-          allowNull: false,
-        },
-      });
-      Comment.belongsTo(models.Post, {
-        foreignKey: {
-          allowNull: false,
-        },
-      });
-    };
-  
-    return Comment;
+    Comment.belongsTo(models.Post, {
+      foreignKey: 'postId', // Change the foreign key name to match the column name
+    });
   };
-  
+
+  return Comment;
+};

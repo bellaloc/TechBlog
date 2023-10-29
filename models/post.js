@@ -1,5 +1,18 @@
+'use strict';
+
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
-    const Post = sequelize.define('Post', {
+  class Post extends Model {
+    static associate(models) {
+      // Define associations here
+      Post.belongsTo(models.User, { foreignKey: 'userId' }); // A Post belongs to a User
+      Post.hasMany(models.Comment, { foreignKey: 'postId' }); // A Post has many Comments
+    }
+  }
+
+  Post.init(
+    {
       title: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -8,19 +21,31 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.TEXT,
         allowNull: false,
       },
-    });
-  
-    Post.associate = (models) => {
-      Post.belongsTo(models.User, {
-        foreignKey: {
-          allowNull: false,
-        },
-      });
-      Post.hasMany(models.Comment, {
-        onDelete: 'CASCADE', // Delete associated comments when a post is deleted
-      });
-    };
-  
-    return Post;
-  };
-  
+      userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+    },
+    {
+      sequelize,
+      modelName: 'Post',
+    }
+  );
+
+  // Add validations for the userId column and the title column
+  Post.validate({
+    userId: {
+      notNull: {
+        msg: 'UserId is required',
+      },
+    },
+    title: {
+      len: {
+        args: [3, 255],
+        msg: 'Title must be between 3 and 255 characters long',
+      },
+    },
+  });
+
+  return Post;
+};

@@ -8,6 +8,11 @@ const userController = {
     try {
       const { username, password } = req.body;
 
+      // Validate the username and password fields
+      if (!username || !password) {
+        return res.status(400).json({ error: 'Username and password fields are required' });
+      }
+
       // Check if the username is already taken
       const existingUser = await db.User.findOne({ where: { username } });
 
@@ -31,6 +36,11 @@ const userController = {
   loginUser: async (req, res) => {
     try {
       const { username, password } = req.body;
+
+      // Validate the session.userId field
+      if (!req.session.userId) {
+        return res.status(401).json({ error: 'You must be logged in to logout' });
+      }
 
       const user = await db.User.findOne({ where: { username } });
 

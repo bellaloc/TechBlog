@@ -1,12 +1,25 @@
 const db = require('../models');
 
 const commentController = {
-  // Create a new comment for a post
+  // Create a new comment
   createComment: async (req, res) => {
     try {
       const { text, postId } = req.body;
       const { userId } = req.session; // Assuming you store user's ID in the session
 
+      // Validate the text and postId fields
+      if (!text || !postId || !userId) {
+        return res.status(400).json({ error: 'text, postId, and userId fields are required' });
+      }
+
+      // Check if the post exists
+      const post = await db.Post.findOne({ where: { id: postId } });
+
+      if (!post) {
+        return res.status(404).json({ error: 'Post not found' });
+      }
+
+      // Create the comment
       const comment = await db.Comment.create({
         text,
         PostId: postId,
@@ -25,9 +38,15 @@ const commentController = {
     try {
       const postId = req.params.postId;
 
+      // Validate the postId field
+      if (!postId) {
+        return res.status(400).json({ error: 'postId field is required' });
+      }
+
+      // Get all comments for the post
       const comments = await db.Comment.findAll({
         where: { PostId: postId },
-        include: db.User,
+        include: db.User, // Include the User model to get the user's information
       });
 
       res.json({ comments });
@@ -43,13 +62,20 @@ const commentController = {
       const commentId = req.params.commentId;
       const { text } = req.body;
 
+      // Validate the commentId and text fields
+      if (!commentId || !text) {
+        return res.status(400).json({ error: 'commentId and text fields are required' });
+      }
+
+      // Find the comment
       const comment = await db.Comment.findByPk(commentId);
 
       if (!comment) {
         return res.status(404).json({ error: 'Comment not found' });
       }
 
-      comment.text = text; // Update the comment text
+      // Update the comment text
+      comment.text = text;
       await comment.save();
 
       res.json({ comment });
@@ -64,15 +90,23 @@ const commentController = {
     try {
       const commentId = req.params.commentId;
 
+      // Validate the commentId field
+      if (!commentId) {
+        return res.status(400).json({ error: 'commentId field is required' });
+      }
+
+      // Find the comment
       const comment = await db.Comment.findByPk(commentId);
 
       if (!comment) {
         return res.status(404).json({ error: 'Comment not found' });
       }
 
-      await comment.destroy(); // Delete the comment
+      // Delete the comment
+      await comment.destroy();
 
-      res.status(204).end(); // Respond with 204 No Content status
+      // Respond with 204 No Content status
+      res.status(204).end();
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Failed to delete comment' });
