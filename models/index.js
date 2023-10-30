@@ -8,7 +8,8 @@ const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
-const db = {};
+const db = { techBlog_db: 'techBlog_db' };
+
 
 let sequelize;
 
@@ -18,9 +19,9 @@ if (!config.use_env_variable) {
 }
 
 // Validate the JAWSDB_URL environment variable
-if (!process.env.JAWSDB_URL) {
-  throw new Error('The JAWSDB_URL environment variable must not be null.');
-}
+//if (!process.env.JAWSDB_URL) {
+  //throw new Error('The JAWSDB_URL environment variable must not be null.');
+//}//
 
 // Validate the DB_NAME environment variable
 if (!process.env.DB_NAME) {

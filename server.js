@@ -26,11 +26,10 @@ const sess = {
   saveUninitialized: false,
   store: new SequelizeStore({
     db: sequelize,
-  }), // <- Added a closing parenthesis here
+  }), // Closing parenthesis was missing here
 };
 
 app.use(session(sess));
-
 
 // Inform Express.js on which template engine to use
 app.engine('handlebars', hbs.engine);
@@ -46,7 +45,6 @@ app.get('/', (req, res) => {
 
 // Serve the static files
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 // Use the routes
 app.use(routes);
