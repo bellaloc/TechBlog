@@ -1,11 +1,23 @@
 {
-    "development": {
-      "use_env_variable": "DATABASE_URL",
-      "dialect": "mysql"
-    },
-    "production": {
-      "use_env_variable": "JAWSDB_URL",
-      "dialect": "mysql"
-    }
+  "development": {
+    "username": "your_dev_username",
+    "password": "your_dev_password",
+    "database": "your_dev_database",
+    "host": "localhost",
+    "dialect": "mysql",
+    "port": 3306
+  },
+  "test": {
+    "username": "your_test_username",
+    "password": "your_test_password",
+    "database": "your_test_database",
+    "host": "localhost",
+    "dialect": "mysql",
+    "port": 3306
+  },
+  "production": {
+    "use_env_variable": "JAWSDB_URL",
+    "dialect": "mysql"
+
   }
-  
+}

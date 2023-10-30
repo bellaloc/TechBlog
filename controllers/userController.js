@@ -76,7 +76,7 @@ const userController = {
           console.error(err);
           return res.status(500).json({ error: 'Failed to logout' });
         }
-        res.status(204).end(); // Respond with 204 No Content status
+        res.status(204).end(); // Respond with 204 No Content status for successful logout
       });
     } catch (error) {
       console.error(error);

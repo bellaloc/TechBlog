@@ -5,7 +5,7 @@ const commentController = {
   createComment: async (req, res) => {
     try {
       const { text, postId } = req.body;
-      const { userId } = req.session; // Assuming you store user's ID in the session
+      const { userId } = req.session; // Assuming you store the user's ID in the session
 
       // Validate the text and postId fields
       if (!text || !postId || !userId) {
@@ -29,7 +29,7 @@ const commentController = {
       res.status(201).json({ comment });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Failed to create comment' });
+      res.status(500).json({ error: 'Failed to create a comment' });
     }
   },
 
@@ -81,7 +81,7 @@ const commentController = {
       res.json({ comment });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Failed to update comment' });
+      res.status(500).json({ error: 'Failed to update the comment' });
     }
   },
 
@@ -105,11 +105,11 @@ const commentController = {
       // Delete the comment
       await comment.destroy();
 
-      // Respond with 204 No Content status
-      res.status(204).end();
+      // Respond with a success message
+      res.status(200).json({ message: 'Comment deleted successfully' });
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Failed to delete comment' });
+      res.status(500).json({ error: 'Failed to delete the comment' });
     }
   },
 };

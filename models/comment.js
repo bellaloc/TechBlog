@@ -1,7 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('./config/connection'); 
-
-
+const sequelize = require('./config/connection');
 
 class Comment extends Model {}
 
@@ -15,7 +13,7 @@ Comment.init(
   },
   {
     sequelize,
-    modelName: 'comment',
+    modelName: 'Comment', // Corrected modelName to 'Comment' to match the naming convention
   }
 );
 
