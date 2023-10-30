@@ -37,9 +37,9 @@ const userController = {
     try {
       const { username, password } = req.body;
 
-      // Validate the session.userId field
-      if (!req.session.userId) {
-        return res.status(401).json({ error: 'You must be logged in to logout' });
+      // Validate the username and password fields
+      if (!username || !password) {
+        return res.status(400).json({ error: 'Username and password fields are required' });
       }
 
       const user = await db.User.findOne({ where: { username } });
@@ -66,13 +66,22 @@ const userController = {
 
   // User logout
   logoutUser: (req, res) => {
-    req.session.destroy((err) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({ error: 'Failed to logout' });
+    try {
+      if (!req.session.userId) {
+        return res.status(401).json({ error: 'You must be logged in to logout' });
       }
-      res.status(204).end(); // Respond with 204 No Content status
-    });
+
+      req.session.destroy((err) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ error: 'Failed to logout' });
+        }
+        res.status(204).end(); // Respond with 204 No Content status
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to logout' });
+    }
   },
 };
 

@@ -49,8 +49,8 @@ const postController = {
       const postId = req.params.postId;
 
       // Validate the postId field
-      if (typeof postId !== 'number' || !postId) {
-        return res.status(400).json({ error: 'postId field must be a non-empty number' });
+      if (isNaN(postId) || postId <= 0) {
+        return res.status(400).json({ error: 'postId must be a positive number' });
       }
 
       // Find the post by ID
@@ -78,8 +78,8 @@ const postController = {
       const { title, content } = req.body;
 
       // Validate the postId and content fields
-      if (typeof postId !== 'number' || !postId || typeof content !== 'string' || !content) {
-        return res.status(400).json({ error: 'postId and content fields must be non-empty' });
+      if (isNaN(postId) || postId <= 0 || typeof title !== 'string' || typeof content !== 'string') {
+        return res.status(400).json({ error: 'Invalid input data' });
       }
 
       // Find the post by ID
@@ -106,32 +106,32 @@ const postController = {
   },
 
   // Delete a post
-async deletePost(req, res) {
-  try {
-    const postId = req.params.postId;
+  async deletePost(req, res) {
+    try {
+      const postId = req.params.postId;
 
-    // Validate the postId field
-    if (typeof postId !== 'number' || !postId) {
-      return res.status(400).json({ error: 'postId field must be a non-empty number' });
+      // Validate the postId field
+      if (isNaN(postId) || postId <= 0) {
+        return res.status(400).json({ error: 'postId must be a positive number' });
+      }
+
+      // Find the post by ID
+      const post = await db.Post.findByPk(postId);
+
+      // If the post does not exist, return a 404 error
+      if (!post) {
+        return res.status(404).json({ error: 'Post not found' });
+      }
+
+      // Delete the post
+      await post.destroy();
+
+      // Respond with a 204 No Content status
+      res.status(204).end();
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to delete post' });
     }
-
-    // Find the post by ID
-    const post = await db.Post.findByPk(postId);
-
-    // If the post does not exist, return a 404 error
-    if (!post) {
-      return res.status(404).json({ error: 'Post not found' });
-    }
-
-    // Delete the post
-    await post.destroy();
-
-    // Respond with a 204 No Content status
-    res.status(204).end();
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to delete post' });
-  };
   },
 };
 

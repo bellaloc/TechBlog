@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     });
     Comment.belongsTo(models.Post, {
-      foreignKey: 'postId', // Change the foreign key name to match the column name
+      foreignKey: 'postId', // Corrected the foreign key name to match the column name
     });
   };
 

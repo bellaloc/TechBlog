@@ -16,6 +16,12 @@ module.exports = (sequelize, DataTypes) => {
       title: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          len: {
+            args: [3, 255],
+            msg: 'Title must be between 3 and 255 characters long',
+          },
+        },
       },
       content: {
         type: DataTypes.TEXT,
@@ -24,6 +30,11 @@ module.exports = (sequelize, DataTypes) => {
       userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        validate: {
+          notNull: {
+            msg: 'UserId is required',
+          },
+        },
       },
     },
     {
@@ -31,21 +42,6 @@ module.exports = (sequelize, DataTypes) => {
       modelName: 'Post',
     }
   );
-
-  // Add validations for the userId column and the title column
-  Post.validate({
-    userId: {
-      notNull: {
-        msg: 'UserId is required',
-      },
-    },
-    title: {
-      len: {
-        args: [3, 255],
-        msg: 'Title must be between 3 and 255 characters long',
-      },
-    },
-  });
 
   return Post;
 };
