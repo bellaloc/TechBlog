@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../models');
+const db = require('../../models');
 const passport = require('passport'); // Import Passport for authentication
 
 // Get all posts
