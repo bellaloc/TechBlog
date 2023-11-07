@@ -1,15 +1,12 @@
 'use strict';
 
-// This file exports all of the model files in the models directory.
-
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
-const db = { techBlog_db: 'techBlog_db' };
-
+const db = {};
 
 let sequelize;
 
@@ -18,38 +15,19 @@ if (!config.use_env_variable) {
   throw new Error('The use_env_variable property in the config object must not be null.');
 }
 
-// Validate the JAWSDB_URL environment variable
-//if (!process.env.JAWSDB_URL) {
-  //throw new Error('The JAWSDB_URL environment variable must not be null.');
-//}//
-
-// Validate the DB_NAME environment variable
-if (!process.env.DB_NAME) {
-  throw new Error('The DB_NAME environment variable must not be null.');
-}
-
-// Validate the DB_USER environment variable
-if (!process.env.DB_USER) {
-  throw new Error('The DB_USER environment variable must not be null.');
-}
-
-// Validate the DB_PASSWORD environment variable
-if (!process.env.DB_PASSWORD) {
-  throw new Error('The DB_PASSWORD environment variable must not be null.');
-}
-
-// Validate the DB_HOST environment variable
-if (!process.env.DB_HOST) {
-  throw new Error('The DB_HOST environment variable must not be null.');
-}
-
-// Validate the DB_PORT environment variable
-if (!process.env.DB_PORT) {
-  throw new Error('The DB_PORT environment variable must not be null.');
+// Validate the environment variables (DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT)
+const requiredEnvVariables = ['DB_NAME', 'DB_USER', 'DB_PASSWORD', 'DB_HOST', 'DB_PORT'];
+for (const envVar of requiredEnvVariables) {
+  if (!process.env[envVar]) {
+    throw new Error(`The ${envVar} environment variable must not be null.`);
+  }
 }
 
 // Create a new Sequelize instance
-sequelize = new Sequelize(process.env[config.use_env_variable], config);
+sequelize = new Sequelize(
+  process.env[config.use_env_variable], // Use the environment variable specified in config
+  config
+);
 
 // Load all of the model files
 fs

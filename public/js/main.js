@@ -36,13 +36,21 @@ async function fetchAndDisplayPosts() {
         loadComments(post.id);
       });
     } else {
-      // Handle error response
-      console.error('Error fetching and displaying posts:', response.status, response.statusText);
+      handleErrorResponse(response, 'Error fetching and displaying posts');
     }
   } catch (error) {
-    // Handle network error
-    console.error('Error fetching and displaying posts:', error);
+    handleNetworkError(error, 'Error fetching and displaying posts');
   }
+}
+
+// Helper function to handle error responses
+function handleErrorResponse(response, message) {
+  console.error(`${message}: ${response.status} ${response.statusText}`);
+}
+
+// Helper function to handle network errors
+function handleNetworkError(error, message) {
+  console.error(`${message}: ${error}`);
 }
 
 // Add a comment to a post
@@ -59,19 +67,16 @@ async function addComment(postId) {
       });
 
       if (response.ok) {
-        // Handle successful comment creation
         const newComment = await response.json();
         const commentsContainer = document.querySelector(`.comments[data-post-id="${postId}"]`);
         const commentElement = document.createElement('div');
         commentElement.textContent = newComment.text;
         commentsContainer.appendChild(commentElement);
       } else {
-        // Handle error response
-        console.error('Error adding a comment:', response.status, response.statusText);
+        handleErrorResponse(response, 'Error adding a comment');
       }
     } catch (error) {
-      // Handle network error
-      console.error('Error adding a comment:', error);
+      handleNetworkError(error, 'Error adding a comment');
     }
   }
 }
@@ -81,7 +86,6 @@ async function loadComments(postId) {
   try {
     const response = await fetch(`/api/posts/${postId}/comments`);
     if (response.ok) {
-      // Handle successful comment retrieval
       const comments = await response.json();
       const commentsContainer = document.querySelector(`.comments[data-post-id="${postId}"]`);
       commentsContainer.innerHTML = '';
@@ -92,12 +96,10 @@ async function loadComments(postId) {
         commentsContainer.appendChild(commentElement);
       });
     } else {
-      // Handle error response
-      console.error('Error fetching and displaying comments:', response.status, response.statusText);
+      handleErrorResponse(response, 'Error fetching and displaying comments');
     }
   } catch (error) {
-    // Handle network error
-    console.error('Error fetching and displaying comments:', error);
+    handleNetworkError(error, 'Error fetching and displaying comments');
   }
 }
 

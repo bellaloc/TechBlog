@@ -1,13 +1,10 @@
 'use strict';
-
 const bcrypt = require('bcrypt');
-
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      // Define associations here
       User.hasMany(models.Post, {
         foreignKey: 'userId',
       });
@@ -15,23 +12,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId',
       });
     }
-
-    async setPassword(password) {
-      this.password = await bcrypt.hash(password, 10);
-    }
-
-    async validatePassword(password) {
-      return await bcrypt.compare(password, this.password);
-    }
   }
 
   User.init(
     {
-      firstName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      lastName: {
+      username: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -61,6 +46,13 @@ module.exports = (sequelize, DataTypes) => {
       modelName: 'User',
     }
   );
+
+  // Add a hook to hash the password before creating or updating the user
+  User.addHook('beforeSave', async (user) => {
+    if (user.changed('password')) {
+      user.password = await bcrypt.hash(user.password, 10);
+    }
+  });
 
   return User;
 };
