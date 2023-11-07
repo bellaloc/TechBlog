@@ -5,16 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="/css/style.css">
-    <!-- Include a link to a CSS framework if you're using one, e.g., Bootstrap -->
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css">
 </head>
 <body>
     <header>
-        <h1>Welcome to Your Dashboard</h1>
-        <a href="/">Back to Homepage</a>
-        <a href="/logout">Log Out</a>
+        <h1 class="text-center">Welcome to Your Dashboard</h1>
+        <div class="text-center">
+            <a href="/" class="btn btn-primary">Back to Homepage</a>
+            <a href="/logout" class="btn btn-danger">Log Out</a>
+        </div>
     </header>
-    <main class="container">
+    <main class="container mt-4">
         <section>
             <h2>Your Blog Posts</h2>
             {{#if posts}}
@@ -32,8 +34,8 @@
                                 <td>{{title}}</td>
                                 <td>{{content}}</td>
                                 <td>
-                                    <a href="/edit/{{id}}">Edit</a>
-                                    <a href="/delete/{{id}}">Delete</a>
+                                    <a href="/edit/{{id}}" class="btn btn-info">Edit</a>
+                                    <a href="/delete/{{id}}" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
                         {{/each}}
@@ -46,16 +48,16 @@
         <section>
             <h2>Create a New Blog Post</h2>
             <form action="/create" method="POST">
-                <div class="form-group">
-                    <label for="title">Title:</label>
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title:</label>
                     <input type="text" id="title" name="title" class="form-control" required>
                 </div>
-                <div class="form-group">
-                    <label for="content">Content:</label>
+                <div class="mb-3">
+                    <label for="content" class="form-label">Content:</label>
                     <textarea id="content" name="content" rows="4" class="form-control" required></textarea>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Create Post</button>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-success">Create Post</button>
                 </div>
             </form>
         </section>

@@ -1,13 +1,12 @@
 const express = require('express');
-const commentController = require('../../controllers/commentController'); // Update the path
-
 const router = express.Router();
+const commentController = require('../controllers/commentController');
 
-// Create a comment
+// Get all comments
+router.get('/comments', commentController.getAllComments);
+
+// Create a new comment
 router.post('/comments', commentController.createComment);
-
-// Get comments for a post
-router.get('/posts/:postId/comments', commentController.getCommentsForPost);
 
 // Update a comment
 router.put('/comments/:commentId', commentController.updateComment);

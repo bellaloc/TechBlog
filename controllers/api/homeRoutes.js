@@ -1,19 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
-const passport = require('passport');
 
 // Get all posts
 router.get('/posts', async (req, res) => {
   try {
-    // Get all posts from the database, including the author information
     const posts = await db.Post.findAll({
-      include: {
-        model: db.User,
-        as: 'author',
-      },
+      include: { model: db.User, as: 'author' },
     });
-
     res.json(posts);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -24,88 +18,59 @@ router.get('/posts', async (req, res) => {
 router.get('/posts/:id', async (req, res) => {
   try {
     const postId = parseInt(req.params.id);
-
     const post = await db.Post.findByPk(postId, {
-      include: {
-        model: db.User,
-        as: 'author',
-      },
+      include: { model: db.User, as: 'author' },
     });
-
     if (!post) {
       res.status(404).json({ error: 'Post not found' });
-      return;
+    } else {
+      res.json(post);
     }
-
-    res.json(post);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-// Add a new post 
-router.post('/posts', express-session.authenticate('jwt'), async (req, res) => {
+// Add a new post
+router.post('/posts', async (req, res) => {
   try {
     const postData = req.body;
-
-    // Create a new post associated with the authenticated user
-    const post = await db.Post.create({
-      ...postData,
-      authorId: req.user.id,
-    });
-
-    res.json(post);
+    // Create a new post (you might want to add authentication here)
+    const post = await db.Post.create(postData);
+    res.status(201).json(post); // 201 Created status for successful creation
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-// Update a post by ID 
-router.put('/posts/:id', express-session.authenticate('jwt'), async (req, res) => {
+// Update a post by ID
+router.put('/posts/:id', async (req, res) => {
   try {
     const postId = parseInt(req.params.id);
     const postData = req.body;
-
     const post = await db.Post.findByPk(postId);
-
     if (!post) {
       res.status(404).json({ error: 'Post not found' });
-      return;
+    } else {
+      await post.update(postData);
+      res.json(post);
     }
-
-    if (post.authorId !== req.user.id) {
-      res.status(403).json({ error: 'Unauthorized' });
-      return;
-    }
-
-    await post.update(postData);
-
-    res.json(post);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-// Delete a post by ID 
-router.delete('/posts/:id', express-session.authenticate('jwt'), async (req, res) => {
+// Delete a post by ID
+router.delete('/posts/:id', async (req, res) => {
   try {
     const postId = parseInt(req.params.id);
-
     const post = await db.Post.findByPk(postId);
-
     if (!post) {
       res.status(404).json({ error: 'Post not found' });
-      return;
+    } else {
+      await post.destroy();
+      res.status(204).end(); // 204 No Content status for successful deletion
     }
-
-    if (post.authorId !== req.user.id) {
-      res.status(403).json({ error: 'Unauthorized' });
-      return;
-    }
-
-    await post.destroy();
-
-    res.status(204).end(); // 204 No Content status for successful deletion
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

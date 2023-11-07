@@ -1,16 +1,12 @@
 const express = require('express');
-const postController = require('../../controllers/postController'); // Update the path
-
 const router = express.Router();
-
-// Create a post
-router.post('/posts', postController.createPost);
+const postController = require('../controllers/postController');
 
 // Get all posts
 router.get('/posts', postController.getAllPosts);
 
-// Get a specific post by ID
-router.get('/posts/:postId', postController.getPostById);
+// Create a new post
+router.post('/posts', postController.createPost);
 
 // Update a post
 router.put('/posts/:postId', postController.updatePost);

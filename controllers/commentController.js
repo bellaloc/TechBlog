@@ -5,7 +5,7 @@ const commentController = {
   createComment: async (req, res) => {
     try {
       const { text, postId } = req.body;
-      const { userId } = req.session; // Assuming you store the user's ID in the session
+      const { userId } = req.session; 
 
       // Validate the text and postId fields
       if (!text || !postId || !userId) {

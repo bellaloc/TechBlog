@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('./config/connection');
+const sequelize = require('../config/connection');
 
 class Comment extends Model {}
 
@@ -9,15 +9,25 @@ Comment.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    // Define your other Comment model properties here
+    author: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    upvotes: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+    downvotes: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+   
   },
   {
     sequelize,
-    modelName: 'Comment', // Corrected modelName to 'Comment' to match the naming convention
+    modelName: 'Comment',
   }
 );
-
-// You can define validation methods here if needed
 
 Comment.associate = (models) => {
   Comment.belongsTo(models.User, {
@@ -26,7 +36,7 @@ Comment.associate = (models) => {
     },
   });
   Comment.belongsTo(models.Post, {
-    foreignKey: 'postId', // Corrected the foreign key name to match the column name
+    foreignKey: 'postId',
   });
 };
 

@@ -1,19 +1,17 @@
 const express = require('express');
-<<<<<<< HEAD:controllers/api/userRoutes.js
-const userController = require('../userController');
-=======
-const userController = require('../../controllers/userController'); // Update the path
->>>>>>> 4e7cba26b18f03443dead361ea840e276eab416e:routes/userRoutes.js
-
 const router = express.Router();
+const userController = require('../controllers/userController');
 
-// User registration
-router.post('/register', userController.registerUser);
+// Get all users
+router.get('/users', userController.getAllUsers);
 
-// User login
-router.post('/login', userController.loginUser);
+// Create a new user
+router.post('/users', userController.createUser);
 
-// User logout
-router.post('/logout', userController.logoutUser);
+// Update a user
+router.put('/users/:userId', userController.updateUser);
+
+// Delete a user
+router.delete('/users/:userId', userController.deleteUser);
 
 module.exports = router;

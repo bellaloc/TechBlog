@@ -25,7 +25,7 @@ for (const envVar of requiredEnvVariables) {
 
 // Create a new Sequelize instance
 sequelize = new Sequelize(
-  process.env[config.use_env_variable], // Use the environment variable specified in config
+  process.env[config.use_env_variable], 
   config
 );
 

@@ -1,6 +1,6 @@
 const db = require('../models');
 const bcrypt = require('bcrypt');
-const saltRounds = 10; // You can adjust the number of salt rounds
+const saltRounds = 10; 
 
 const userController = {
   // User registration

@@ -1,18 +1,25 @@
 const express = require('express');
-const commentController = require('../../controllers/commentController'); // Update the path
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-const router = express.Router();
+// Define and use your API routes
+const userRoutes = require('./routes/userRoutes');
+const postRoutes = require('./routes/postRoutes');
+const commentRoutes = require('./routes/commentRoutes');
 
-// Create a comment
-router.post('/comments', commentController.createComment);
+app.use('/api/users', userRoutes);
+app.use('/api/posts', postRoutes);
+app.use('/api/comments', commentRoutes);
 
-// Get comments for a post
-router.get('/posts/:postId/comments', commentController.getCommentsForPost);
+// Middleware for handling JSON data
+app.use(express.json());
 
-// Update a comment
-router.put('/comments/:commentId', commentController.updateComment);
+// Error handling middleware (customize as needed)
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Internal Server Error' });
+});
 
-// Delete a comment
-router.delete('/comments/:commentId', commentController.deleteComment);
-
-module.exports = router;
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>User Profile</h1>
+        <nav class="navbar">
+            <ul>
+                <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="/dashboard" class="nav-link">Dashboard</a></li>
+                {{#if loggedIn}}
+                    <li class="nav-item"><a href="/logout" class="nav-link">Log Out</a></li>
+                {{else}}
+                    <li class="nav-item"><a href="/login" class="nav-link">Log In</a></li>
+                    <li class="nav-item"><a href="/signup" class="nav-link">Sign Up</a></li>
+                {{/if}}
+            </ul>
+        </nav>
+    </header>
+    <main class="container">
+        <section>
+            <h2>User Profile</h2>
+            <div class="user-profile">
+                <p><strong>Username:</strong> {{user.username}}</p>
+                <p><strong>Email:</strong> {{user.email}}</p>
+                <p><strong>Member Since:</strong> {{user.createdAt}}</p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
