@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
+const homeController = require('../controllers/homeController');
+
+// Define routes for the home page
+router.get('/', homeController.renderHomePage);
 
 // Get all posts
 router.get('/posts', async (req, res) => {

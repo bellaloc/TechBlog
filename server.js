@@ -18,6 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 // Create and configure the express-session
 const sess = {
   secret: process.env.SESSION_SECRET,
@@ -31,9 +32,25 @@ const sess = {
 
 app.use(session(sess));
 
-// Routes
-app.use(require('./controllers/api'));
-app.use(require('./controllers/routes'));
+// Import your controllers and routes with absolute paths
+const apiController = require('./controllers/api');
+const routesController = require('./controllers/routes');
+const commentController = require('./controllers/commentController');
+const homeController = require('./controllers/homeController');
+const postController = require('./controllers/postController');
+const userController = require('./controllers/userController');
+const commentRoutes = require('./controllers/api/commentRoutes');
+const apiRoutes = require('./controllers/api/index');
+
+// Use the imported controllers and routes
+app.use(apiController);
+app.use(routesController);
+app.use(commentController);
+app.use(homeController);
+app.use(postController);
+app.use(userController);
+app.use(commentRoutes);
+app.use(apiRoutes);
 
 // Initialize the server and database connection
 sequelize.sync({ force: false }).then(() => {
