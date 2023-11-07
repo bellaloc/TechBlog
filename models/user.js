@@ -2,14 +2,8 @@ const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
-
-  class User extends Model {
-    checkPassword(loginPw) {
-      return bcrypt.compareSync(loginPw, this.password);
-    }
-  }
+class User extends Model {}
    
-
   User.init(
     {
       username: {
@@ -42,13 +36,5 @@ const sequelize = require('../config/connection');
       modelName: 'User',
     }
   );
-
-  // Add a hook to hash the password before creating or updating the user
-  User.addHook('beforeSave', async (user) => {
-    if (user.changed('password')) {
-      user.password = await bcrypt.hash(user.password, 10);
-    }
-  });
-
-  return User;
-};
+  
+  module.exports = User;

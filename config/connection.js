@@ -13,9 +13,11 @@ if (process.env.JAWSDB_URL) {
     {
       host: 'localhost',
       dialect: 'mysql',
-      port: 3306
+      port: 3306,
     }
   );
 }
+
+console.log(process.env.DB_USER, process.env.DB_PASSWORD, process.env.DB_NAME);
 
 module.exports = sequelize;
