@@ -1,5 +1,17 @@
 {
-  "dependencies": {
+    "name": "tech_blog",
+    "version": "1.0.0",
+    "description": "UCLA Bootcamp Tech Blog",
+    "main": "server.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node server.js",
+      "seed": "node seeds/seeds.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
     "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.2",
     "connect-session-sequelize": "^7.1.7",

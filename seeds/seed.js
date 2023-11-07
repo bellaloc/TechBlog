@@ -1,6 +1,13 @@
+const sequelize = require('../config/connection');
+const commentData = require('./commentData.json');
+const userData = require('./userData.json');
+const postData = require('./postData.json');
+
 const { User, Post, Comment } = require('./models'); 
 
 const seedDatabase = async () => {
+  await sequelize.sync({ force: true });
+
   try {
     // Create some sample users
     const users = await User.bulkCreate([
@@ -26,7 +33,9 @@ const seedDatabase = async () => {
     console.log('Sample data has been seeded into the database.');
   } catch (error) {
     console.error('Error seeding the database:', error);
-  }
+  };
+
+  process.exit(0);
 };
 
 seedDatabase();

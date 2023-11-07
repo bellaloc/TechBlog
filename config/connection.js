@@ -1,33 +1,21 @@
-const { Sequelize } = require('sequelize');
-const dotenv = require('dotenv');
-const path = require('path');
+const Sequelize = require('sequelize');
+require('dotenv').config();
 
-dotenv.config();
+let sequelize;
 
-const env = process.env.NODE_ENV || 'development';
-
-let config;
-if (process.env.NODE_ENV === 'production') {
-  config = {
-    dialect: 'mysql2',
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    username: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-  };
+if (process.env.JAWSDB_URL) {
+  sequelize = new Sequelize(process.env.JAWSDB_URL);
 } else {
-  const dbConfig = require(path.join(__dirname, '../config', 'config.json'))[env];
-  config = {
-    dialect: dbConfig.dialect,
-    host: dbConfig.host,
-    port: dbConfig.port,
-    username: dbConfig.username,
-    password: dbConfig.password,
-    database: dbConfig.database,
-  };
+  sequelize = new Sequelize(
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASSWORD,
+    {
+      host: 'localhost',
+      dialect: 'mysql',
+      port: 3306
+    }
+  );
 }
-
-const sequelize = new Sequelize(config);
 
 module.exports = sequelize;

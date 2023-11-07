@@ -1,18 +1,14 @@
-'use strict';
+const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
-const { Model } = require('sequelize');
+const sequelize = require('../config/connection');
 
-module.exports = (sequelize, DataTypes) => {
+
   class User extends Model {
-    static associate(models) {
-      User.hasMany(models.Post, {
-        foreignKey: 'userId',
-      });
-      User.hasMany(models.Comment, {
-        foreignKey: 'userId',
-      });
+    checkPassword(loginPw) {
+      return bcrypt.compareSync(loginPw, this.password);
     }
   }
+   
 
   User.init(
     {

@@ -1,60 +1,45 @@
-const express = require('express');
-const exphbs = require('express-handlebars');
-const session = require('express-session');
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const path = require('path');
+const express = require('express');
+const session = require('express-session');
+const exphbs = require('express-handlebars');
+const routes = require('./controllers');
+
 const sequelize = require('./config/connection');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Configure Handlebars as the view engine
+// Set up Handlebars.js engine with custom helpers
 const hbs = exphbs.create({});
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
 
-// Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
-
-
-// Create and configure the express-session
 const sess = {
-  secret: process.env.SESSION_SECRET,
-  cookie: {},
+  secret: 'Super secret secret',
+  cookie: {
+    maxAge: 300000,
+    httpOnly: true,
+    secure: false,
+    sameSite: 'strict',
+  },
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   store: new SequelizeStore({
-    db: sequelize,
-  }),
+    db: sequelize
+  })
 };
 
 app.use(session(sess));
 
-// Import your controllers and routes with absolute paths
-const apiController = require('./controllers/api');
-const routesController = require('./controllers/routes');
-const commentController = require('./controllers/commentController');
-const homeController = require('./controllers/homeController');
-const postController = require('./controllers/postController');
-const userController = require('./controllers/userController');
-const commentRoutes = require('./controllers/api/commentRoutes');
-const apiRoutes = require('./controllers/api/index');
+// Inform Express.js on which template engine to use
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 
-// Use the imported controllers and routes
-app.use(apiController);
-app.use(routesController);
-app.use(commentController);
-app.use(homeController);
-app.use(postController);
-app.use(userController);
-app.use(commentRoutes);
-app.use(apiRoutes);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Initialize the server and database connection
+app.use(routes);
+
 sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-  });
+  app.listen(PORT, () => console.log('Server listening on: http://localhost:' + PORT));
 });
