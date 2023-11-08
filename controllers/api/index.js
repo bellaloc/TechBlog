@@ -6,7 +6,7 @@ const postRoutes = require('./postRoutes');
 const userRoutes = require('./userRoutes');
 const homeRoutes = require('./homeRoutes');
 
-// Define routes for different parts of your API
+
 router.use('/comments', commentRoutes);
 router.use('/posts', postRoutes);
 router.use('/users', userRoutes);

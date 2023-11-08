@@ -5,7 +5,7 @@ const emailElement = document.getElementById('email');
 // Fetch and display user profile data
 async function fetchAndDisplayUserProfile() {
   try {
-    const response = await fetch('/api/user/profile'); 
+    const response = await fetch('/api/user/profile');
     if (response.ok) {
       const userProfile = await response.json();
 
@@ -29,7 +29,6 @@ function handleErrorResponse(response, message) {
 function handleNetworkError(error, message) {
   console.error(`${message}: ${error}`);
 }
-
 
 // Add an event listener to the window load event to fetch and display the user profile
 window.addEventListener('load', fetchAndDisplayUserProfile);

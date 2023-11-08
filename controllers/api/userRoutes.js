@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../models'); // Import your database models
+const db = require('../models'); 
 const userController = require('../controllers/userController');
 
 // User registration route
@@ -23,7 +23,7 @@ router.get('/profile', (req, res) => {
           res.json({
             username: user.username,
             email: user.email,
-            // Add other profile data here if needed
+           
           });
         } else {
           res.status(404).json({ error: 'User not found' });

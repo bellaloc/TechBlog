@@ -39,7 +39,7 @@ const commentController = {
 
       const comments = await db.Comment.findAll({
         where: { PostId: postId },
-        include: db.User, // Include the User model to get the user's information
+        include: db.User, 
       });
 
       res.json({ comments });

@@ -15,7 +15,7 @@ const hbs = exphbs.create({});
 const sess = {
   secret: 'Super secret secret',
   cookie: {
-    maxAge: 300000, // Adjust this to your desired session timeout
+    maxAge: 300000, 
     httpOnly: true,
     secure: false, // Change to true in a production environment with HTTPS
     sameSite: 'strict',
@@ -37,7 +37,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Define your routes (replace 'routes' with your actual route configuration)
+
 app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
