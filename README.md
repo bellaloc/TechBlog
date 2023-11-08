@@ -24,6 +24,9 @@ Tech Blog is a web application that allows users to publish and read technology-
 - Bootstrap: A front-end framework for responsive design.
 - Heroku: A cloud platform for deploying the application.
 
+## heroku link
+https://morning-temple-91811-57fafbc7cf6d.herokuapp.com/
+
 ## Installation
 
 1. Clone the repository:
