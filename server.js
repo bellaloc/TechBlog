@@ -3,7 +3,6 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const routes = require('./controllers');
-
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
@@ -16,9 +15,9 @@ const hbs = exphbs.create({});
 const sess = {
   secret: 'Super secret secret',
   cookie: {
-    maxAge: 300000,
+    maxAge: 300000, // Adjust this to your desired session timeout
     httpOnly: true,
-    secure: false,
+    secure: false, // Change to true in a production environment with HTTPS
     sameSite: 'strict',
   },
   resave: false,
@@ -38,6 +37,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Define your routes (replace 'routes' with your actual route configuration)
 app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {

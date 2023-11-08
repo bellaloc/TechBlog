@@ -1,35 +1,53 @@
+/* homepage.css for Tech Blog Project */
+
+/* Styles for the main container on the homepage */
 .home {
     margin: 40px;
+    /* Add any additional styling for the main container here */
 }
 
+/* Styles for different sections on the homepage */
+
+/* Search dropdowns, user pairings, and search bar results */
 #search-dropdowns, #user-pairings, #searchbar-results {
     margin: 40px;
+    /* Add styling for these elements */
 }
 
+/* Section 1, which may include featured posts or content */
 #section1 {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    /* Add relevant styles for this section */
 }
 
+/* User pairings section, such as suggested users to follow */
 #user-pairings {
     height: 500px;
     padding: 10px;
     overflow: scroll;
+    /* Customize the styles for this section */
 }
 
+/* Customize scrollbar styles for the user pairings section */
 #user-pairings::-webkit-scrollbar {
     overflow: hidden;
+    /* Add scrollbar styling if desired */
 }
 
+/* Media query for responsiveness (adjust breakpoints as needed) */
 @media screen and (max-width: 920px) {
     #section1 {
         flex-direction: column;
         align-items: center;
         justify-content: center;
     }
+
+    /* Update styling for smaller screens */
     #search-dropdowns, #user-pairings {
         width: 100%;
         overflow: visible;
+        /* Modify styles for smaller screens */
     }
 }

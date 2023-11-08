@@ -9,19 +9,12 @@ Comment.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    author: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     upvotes: {
       type: DataTypes.INTEGER,
-      defaultValue: 0,
     },
     downvotes: {
       type: DataTypes.INTEGER,
-      defaultValue: 0,
     },
-   
   },
   {
     sequelize,

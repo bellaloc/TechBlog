@@ -1,91 +1,95 @@
+/* Adjusted landing.css for Tech Blog Project Landing Page */
+
+/* Styles for the header section */
 header {
     text-align: center;
-    font-size: 200%;
-    background-color: rgba(255, 255, 255, 0.044);
-    border-bottom-left-radius: 50px;
-    box-shadow: 3px 3px 10px rgb(0, 0, 0);
+    font-size: 32px;
+    background-color: #333; /* Dark background color */
+    color: #fff; /* Light text color */
+    padding: 20px;
+    border-bottom-left-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-header h1 {
-    background-color: white;
-    color: var(--primary);
-    margin: 0;
-    padding: 10px;
-    border-bottom-left-radius: 50px;
-}
-
+/* Styles for the main content section */
 main {
     display: flex;
-}
-
-img {
-    height: 100vh;
-    margin-right: 0;
-    padding: 0;
-}
-
-#forms {
-    margin: 0 auto;
-    text-align: center;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    padding: 20px;
 }
 
+/* Styles for images, if used in the landing page */
+img {
+    max-width: 100%; /* Ensure images fit within their container */
+    height: auto;
+    display: block; /* Center align images */
+    margin: 0 auto;
+}
+
+/* Styles for the forms container */
+#forms {
+    text-align: center;
+    width: 40%;
+    background-color: #fff; /* Light background color for forms */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Styles for login and signup sections, if present */
 #login, #signup {
     margin: 20px;
+    text-align: center;
 }
 
+/* Styles for form elements */
 form {
     padding: 20px;
-    border-radius: 20px;
-    box-shadow: 3px 3px 10px rgb(0, 0, 0);
-    margin: 0 20px;
 }
 
+/* Styles for form groups that contain labels and input fields */
 .form-group {
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    margin: 10px 0;
 }
 
+/* Styles for form input fields */
 .form-input {
-    margin: 0 10px;
-    border: 1px solid rgb(162, 162, 162);
-    border-radius: 5px;
-    width: 200px;
-}
-
-form, .form-group, label, input {
-    background-color: white;
-    color: var(--primary);
-}
-
-.button {
+    width: 100%; /* Make input fields expand to the full width of the container */
     padding: 10px;
-    border-radius: 20px;
-    border: 1px solid white;
-    width: 30%;
-    background-color: var(--primary);
-    color: white;
+    border: 1px solid #ccc; /* Light border color */
+    border-radius: 5px;
 }
 
-.button:hover {
-    background-color: lightgrey;
-    color: var(--primary);
+/* Styles for form backgrounds and text color */
+form, .form-group, label, input {
+    background-color: #fff;
+    color: #333;
+}
+
+/* Styles for buttons */
+.button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007BFF; /* Primary button color */
+    color: #fff;
+    border-radius: 5px;
     cursor: pointer;
 }
 
-input {
-    border: 1px solid black;
-    padding: 5px;
+/* Styles for button hover effects */
+.button:hover {
+    background-color: #0056b3; /* Darker button color on hover */
 }
 
-@media screen and (max-width: 720px) {
-    img {
-        display: none;
+/* Media query for responsiveness (adjust breakpoints as needed) */
+@media screen and (max-width: 768px) {
+    main {
+        flex-direction: column; /* Stack content on smaller screens */
+        text-align: center;
+    }
+
+    #forms {
+        width: 90%; /* Wider form container on smaller screens */
     }
 }
