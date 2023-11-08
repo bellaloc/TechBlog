@@ -29,7 +29,7 @@ Comment.associate = (models) => {
     },
   });
   Comment.belongsTo(models.Post, {
-    foreignKey: 'postId',
+    foreignKey: 'post_id',
   });
 };
 

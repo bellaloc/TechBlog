@@ -19,12 +19,12 @@ class Post extends Model {}
         type: DataTypes.TEXT,
         allowNull: false,
       },
-      userId: {
+      user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
           notNull: {
-            msg: 'UserId is required',
+            msg: 'user_id is required',
           },
         },
       },

@@ -19,8 +19,7 @@ const seedDatabase = async () => {
     // Create some sample comments
     const comments = await Comment.bulkCreate(commentData);
 
-    // Create the project
-    const project = await Project.create(projectData);
+  
 
     console.log('Sample data has been seeded into the database.');
   } catch (error) {

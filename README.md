@@ -54,7 +54,7 @@ https://morning-temple-91811-57fafbc7cf6d.herokuapp.com/
     CREATE DATABASE your_database_name;
 
     bash
-    npm run seed
+    npm run seed  or node seeds/seeds.js
 
     npm start
 
