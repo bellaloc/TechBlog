@@ -19,7 +19,7 @@ class Post extends Model {}
         type: DataTypes.TEXT,
         allowNull: false,
       },
-      userId: {
+      user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {

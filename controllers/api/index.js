@@ -10,6 +10,6 @@ const homeRoutes = require('./homeRoutes');
 router.use('/api/comments', commentRoutes);
 router.use('/api/posts', postRoutes);
 router.use('/api/users', userRoutes);
-router.use('/home', homeRoutes); 
+router.use('/home', homeRoutes);
 
 module.exports = router;
