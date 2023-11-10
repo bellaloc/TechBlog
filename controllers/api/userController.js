@@ -56,7 +56,7 @@ const userController = {
         return res.status(401).json({ error: 'Invalid credentials' });
       }
 
-      req.session.userId = user.id; // Store user information in the session
+      req.session.userId = user.id; 
 
       res.json({ user });
     } catch (error) {
