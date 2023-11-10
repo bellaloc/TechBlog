@@ -1,4 +1,4 @@
-const db = require('../models');
+const db = require('.././models');
 
 const homeController = {
   // Get all posts for the home page
