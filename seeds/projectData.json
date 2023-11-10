@@ -1,41 +1,38 @@
 {
-    "projectName": "Tech Blog",
-    "description": "A technology blog website for sharing tech news and articles.",
-    "author": "Your Name",
-    "version": "1.0.0",
-    "dependencies": {
-      "express": "^4.17.1",
-      "sequelize": "^6.6.5",
-      "bcrypt": "^5.0.1",
-      "dotenv": "^10.0.0"
-    
+  "projectName": "Tech Blog",
+  "description": "A technology blog website for sharing tech news and articles.",
+  "author": "Your Name",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "^4.17.1",
+    "sequelize": "^6.6.5",
+    "bcrypt": "^5.0.1",
+    "dotenv": "^10.0.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "mocha"
+  },
+  "databaseConfig": {
+    "development": {
+      "username": "your_dev_username",
+      "password": "your_dev_password",
+      "database": "your_dev_database",
+      "host": "localhost",
+      "dialect": "mysql2",
+      "port": 3306
     },
-    "scripts": {
-      "start": "node server.js",
-      "test": "mocha"
-     
+    "test": {
+      "username": "your_test_username",
+      "password": "your_test_password",
+      "database": "your_test_database",
+      "host": "localhost",
+      "dialect": "mysql2",
+      "port": 3306
     },
-    "databaseConfig": {
-      "development": {
-        "username": "your_dev_username",
-        "password": "your_dev_password",
-        "database": "your_dev_database",
-        "host": "localhost",
-        "dialect": "mysql2",
-        "port": 3306
-      },
-      "test": {
-        "username": "your_test_username",
-        "password": "your_test_password",
-        "database": "your_test_database",
-        "host": "localhost",
-        "dialect": "mysql2",
-        "port": 3306
-      },
-      "production": {
-        "use_env_variable": "JAWSDB_URL",
-        "dialect": "mysql2"
-      }
+    "production": {
+      "use_env_variable": "JAWSDB_URL",
+      "dialect": "mysql2"
     }
   }
-  
+}

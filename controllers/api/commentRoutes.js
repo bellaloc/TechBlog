@@ -1,19 +1,17 @@
-
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();
 const commentController = require('../controllers/commentController');
-const { comment } = require('../../models');
-const withAuth = require('../../utils/auth');
 
-// Get all comments
-router.get('/comments', commentController.getAllComments);
+// Get all comments for a post by post ID route
+router.get('/posts/:postId/comments', commentController.getAllCommentsForPost);
 
-  // Create a new comment
-  router.post('/comments', commentController.createComment);
+// Add a new comment to a post by post ID route
+router.post('/posts/:postId/comments', commentController.addCommentToPost);
 
-  // Update a comment
-  router.put('/comments/:commentId', commentController.updateComment);
+// Update a comment by comment ID route
+router.put('/comments/:commentId', commentController.updateCommentById);
 
-  // Delete a comment
-  router.delete('/comments/:commentId', commentController.deleteComment);
+// Delete a comment by comment ID route
+router.delete('/comments/:commentId', commentController.deleteCommentById);
 
 module.exports = router;

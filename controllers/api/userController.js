@@ -1,6 +1,6 @@
-const db = require('../../models');
+const db = require('../models');
 const bcrypt = require('bcrypt');
-const saltRounds = 10; 
+const saltRounds = 10;
 
 const userController = {
   // User registration
@@ -24,6 +24,8 @@ const userController = {
       const hashedPassword = await bcrypt.hash(password, saltRounds);
 
       const user = await db.User.create({ username, password: hashedPassword });
+
+      req.session.userId = user.id; // Store user information in the session
 
       res.status(201).json({ user });
     } catch (error) {
@@ -54,8 +56,7 @@ const userController = {
         return res.status(401).json({ error: 'Invalid credentials' });
       }
 
-      // Store user information in the session
-      req.session.userId = user.id;
+      req.session.userId = user.id; // Store user information in the session
 
       res.json({ user });
     } catch (error) {

@@ -1,9 +1,11 @@
-const router = require('express').Router();
+const userController = require('./userController');
+const postController = require('./postController');
+const commentController = require('./commentController');
+const homeController = require('./homeController');
 
-const apiRoutes = require('./api');
-const homeRoutes = require('./homeRoutes');
-
-router.use('/', homeRoutes);
-router.use('/api', apiRoutes);
-
-module.exports = router;
+module.exports = {
+  userController,
+  postController,
+  commentController,
+  homeController,
+};

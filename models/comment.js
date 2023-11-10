@@ -5,39 +5,43 @@ class Comment extends Model {}
 
 Comment.init(
   {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     text: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
-    author: {
-      type: DataTypes.STRING,
+    user_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'user',
+        key: 'id',
+      },
+    },
+    post_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'post',
+        key: 'id',
+      },
+    },
+    created_at: {
+      type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: DataTypes.NOW,
     },
-    upvotes: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-    },
-    downvotes: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-    },
-   
   },
   {
     sequelize,
-    modelName: 'Comment',
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'comment',
   }
 );
-
-Comment.associate = (models) => {
-  Comment.belongsTo(models.User, {
-    foreignKey: {
-      allowNull: false,
-    },
-  });
-  Comment.belongsTo(models.Post, {
-    foreignKey: 'postId',
-  });
-};
 
 module.exports = Comment;

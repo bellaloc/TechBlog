@@ -1,35 +1,53 @@
+
+
+/* Styles for the main container on the homepage */
 .home {
     margin: 40px;
+   
 }
 
+/* Styles for different sections on the homepage */
+
+/* Search dropdowns, user pairings, and search bar results */
 #search-dropdowns, #user-pairings, #searchbar-results {
     margin: 40px;
+   
 }
 
+/* Section 1, which may include featured posts or content */
 #section1 {
     display: flex;
     justify-content: space-between;
     width: 100%;
+   
 }
 
+/* User pairings section, such as suggested users to follow */
 #user-pairings {
     height: 500px;
     padding: 10px;
     overflow: scroll;
+
 }
 
+/* Customize scrollbar styles for the user pairings section */
 #user-pairings::-webkit-scrollbar {
     overflow: hidden;
+
 }
 
+/* Media query for responsiveness (adjust breakpoints as needed) */
 @media screen and (max-width: 920px) {
     #section1 {
         flex-direction: column;
         align-items: center;
         justify-content: center;
     }
+
+    /* Update styling for smaller screens */
     #search-dropdowns, #user-pairings {
         width: 100%;
         overflow: visible;
+  
     }
 }
