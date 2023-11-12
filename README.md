@@ -58,7 +58,7 @@ https://morning-temple-91811-57fafbc7cf6d.herokuapp.com/
 
     npm start
 
-    Open your web browser and go to http://localhost:3000 to access the application.
+    Open your web browser and go to http://localhost:3006 to access the application.
 
 Usage
 Sign up for an account if you don't have one.
