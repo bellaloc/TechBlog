@@ -1,32 +1,27 @@
 [
   {
       "title": "Tips for Effective Content Marketing",
-      "content": "Learn the best strategies for creating effective content marketing campaigns...",
-      "user_id": 1,
-      "created_at": "2023-11-07T09:00:00.000Z"
+      "content": "Learn the best strategies for creating effective content marketing campaigns..."
+     
   },
   {
       "title": "Web Development Best Practices",
-      "content": "Explore the best practices for web development and create efficient and scalable web applications...",
-      "user_id": 2,
-      "created_at": "2023-11-07T10:00:00.000Z"
+      "content": "Explore the best practices for web development and create efficient and scalable web applications..."
+    
   },
   {
       "title": "Introduction to Artificial Intelligence",
-      "content": "Discover the basics of artificial intelligence, machine learning, and deep learning...",
-      "user_id": 3,
-      "created_at": "2023-11-07T11:00:00.000Z"
+      "content": "Discover the basics of artificial intelligence, machine learning, and deep learning..."
+     
   },
   {
       "title": "Getting Started with Mobile App Development",
-      "content": "Kickstart your journey into mobile app development with this comprehensive guide...",
-      "user_id": 1,
-      "created_at": "2023-11-07T12:00:00.000Z"
+      "content": "Kickstart your journey into mobile app development with this comprehensive guide..."
+      
   },
   {
       "title": "Cybersecurity Fundamentals",
-      "content": "Learn the fundamentals of cybersecurity and protect your digital assets from threats...",
-      "user_id": 3,
-      "created_at": "2023-11-07T13:00:00.000Z"
+      "content": "Learn the fundamentals of cybersecurity and protect your digital assets from threats..."
+     
   }
 ]
