@@ -2,7 +2,8 @@
 
 Tech Blog is a web application that allows users to publish and read technology-related blog posts. It's a platform for tech enthusiasts to share their insights, knowledge, and thoughts on various tech topics.
 
-![Screenshot](screenshot.png)
+![Screenshot](/Users/View/Desktop/Screen Shot 2023-11-13 at 4.36.02 PM.png)
+
 
 ## Features
 
