@@ -1,34 +1,47 @@
-// Select elements in your HTML
-const usernameElement = document.getElementById('username');
-const emailElement = document.getElementById('email');
+const newFormHandler = async (event) => {
+  event.preventDefault();
 
-// Fetch and display user profile data
-async function fetchAndDisplayUserProfile() {
-  try {
-    const response = await fetch('/api/user/profile');
+  const name = document.querySelector('#project-name').value.trim();
+  const needed_funding = document.querySelector('#project-funding').value.trim();
+  const description = document.querySelector('#project-desc').value.trim();
+
+  if (name && needed_funding && description) {
+    const response = await fetch(`/api/projects`, {
+      method: 'POST',
+      body: JSON.stringify({ name, needed_funding, description }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
     if (response.ok) {
-      const userProfile = await response.json();
-
-      // Update the HTML elements with user profile data
-      usernameElement.textContent = userProfile.username;
-      emailElement.textContent = userProfile.email;
+      document.location.replace('/profile');
     } else {
-      handleErrorResponse(response, 'Error fetching user profile');
+      alert('Failed to create project');
     }
-  } catch (error) {
-    handleNetworkError(error, 'Error fetching user profile');
   }
-}
+};
 
-// Helper function to handle error responses
-function handleErrorResponse(response, message) {
-  console.error(`${message}: ${response.status} ${response.statusText}`);
-}
+const delButtonHandler = async (event) => {
+  if (event.target.hasAttribute('data-id')) {
+    const id = event.target.getAttribute('data-id');
 
-// Helper function to handle network errors
-function handleNetworkError(error, message) {
-  console.error(`${message}: ${error}`);
-}
+    const response = await fetch(`/api/projects/${id}`, {
+      method: 'DELETE',
+    });
 
-// Add an event listener to the window load event to fetch and display the user profile
-window.addEventListener('load', fetchAndDisplayUserProfile);
+    if (response.ok) {
+      document.location.replace('/profile');
+    } else {
+      alert('Failed to delete project');
+    }
+  }
+};
+
+document
+  .querySelector('.new-project-form')
+  .addEventListener('submit', newFormHandler);
+
+document
+  .querySelector('.project-list')
+  .addEventListener('click', delButtonHandler);

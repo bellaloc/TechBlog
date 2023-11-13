@@ -23,7 +23,7 @@ res.render("all-posts", {posts})
 //get a single post
 router.get('/post/:id', async (req, res) => {
   try {
-    const postData = await Post.findByPK(req.params.id, {
+    const postData = await Post.findByPk(req.params.id, {
       include: [User,{
         model: Comment, 
         include: [User]
@@ -34,7 +34,7 @@ router.get('/post/:id', async (req, res) => {
       const post = postData.get({
         plain: true
       });
-
+      //res.json(post)
       res.render("single-post", {post})
 
     } else {
