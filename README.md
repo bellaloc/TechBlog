@@ -51,14 +51,14 @@ https://morning-temple-91811-57fafbc7cf6d.herokuapp.com/
     mysql -u your_database_user -p
 
     SQL
-    CREATE DATABASE your_database_name;
+    CREATE DATABASE techBlog_db;
 
     bash
     npm run seed  or node seeds/seeds.js
 
     npm start
 
-    Open your web browser and go to http://localhost:3006 to access the application.
+    Open your web browser and go to http://localhost:3001 to access the application.
 
 Usage
 Sign up for an account if you don't have one.
