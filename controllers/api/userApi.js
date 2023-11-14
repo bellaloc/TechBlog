@@ -3,6 +3,7 @@ const { User } = require('../../models');
 
 router.post('/', async (req, res) => {
   try {
+    console.log(req.body);
     const newUser = await User.create({
       username: req.body.username,
       password: req.body.password,
@@ -45,7 +46,7 @@ router.post('/login', async (req, res) => {
       req.session.username = user.username;
       req.session.loggedIn = true;
 
-      res.json({ user, message: 'You are now logged in!' });
+      res.json({ message: 'You are now logged in!' });
     });
   } catch (err) {
     res.status(400).json({ message: 'No user account found!' });
