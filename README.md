@@ -26,7 +26,7 @@ Tech Blog is a web application that allows users to publish and read technology-
 - Heroku: A cloud platform for deploying the application.
 
 ## heroku link
-https://morning-temple-91811-57fafbc7cf6d.herokuapp.com/
+https://murmuring-cliffs-02800-824951aee946.herokuapp.com/
 
 ## Installation
 
