@@ -1,24 +1,29 @@
 [
     {
    
-      "text": "Great post!"
-     
+      "text": "Great post!",
+      "post_id": 1,
+      "user_id": 1
     },
     {
      
-      "text": "I learned a lot from this post."
-     
+      "text": "I learned a lot from this post.",
+      "post_id": 1,
+      "user_id": 1
   },
   {
-      "text": "Great job on explaining this!"
-     
+      "text": "Great job on explaining this!",
+      "post_id": 1,
+      "user_id": 1
   },
   {
-      "text": "Awesome content! Keep it up!"
-     
+      "text": "Awesome content! Keep it up!",
+      "post_id": 1,
+      "user_id": 1
   },
   {
-      "text": "I found this really helpful."
-    
+      "text": "I found this really helpful.",
+      "post_id": 1,
+      "user_id": 1
   }
 ]
